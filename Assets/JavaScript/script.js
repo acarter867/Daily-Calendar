@@ -2,40 +2,52 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+  //call function to get day and tmie
   let dayTime = getDateTime();
 
   let displayCurrent = $('#currentDay');
   displayCurrent.text(dayTime)
 
+  //set and format hours
   let hour = new Date();
   let currentHour = String('hour-' + String(hour.getHours()).padStart(2, 0));
-  console.log(currentHour);
-  console.log(dayTime);
 
+  //create array of fluid container children with row class
   let mainDiv = $('.container-fluid');
   let hourBlocks = mainDiv.children('.row');
 
-
+  //traverse through dom elements
   for(let i = 0; i < hourBlocks.length; i++){
     let currentRow = hourBlocks[i];
-    console.log(currentRow);
+
+    //pull from local storage and set textArea Values
+    let entries = JSON.parse(localStorage.getItem(currentRow.id));
+    currentTextArea = $(currentRow).children('textarea').text(entries)
+  
     let curDiv = $(currentRow);
+
+    //set classes of time blocks based on current time
     if(currentRow.id < currentHour){
       curDiv.addClass('past');
     }else if(currentRow.id > currentHour){
       curDiv.addClass('future');
     }else{
       curDiv.addClass('present');
-    }
-
-    
+    }    
   }
 
 //push events to local storage
   hourBlocks.children("button").on('click', (e) => {
+      //get parent time block of clicked button
       let buttonParent = $(e.target).parent();
+
+      //get id of parent time block
       let divId = $(buttonParent).attr('id');
+
+      //select text area of parent block
       let selectedText = $(buttonParent).children('textarea');
+
+      //get user input from text area and send to local storage with key set as the id of current time block
       let newEvent = selectedText.val();
       localStorage.setItem(divId, JSON.stringify(newEvent));
     })
