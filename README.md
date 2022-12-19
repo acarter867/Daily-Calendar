@@ -16,4 +16,4 @@ Please refer to the LICENSE file of this repository.
 <a href="https://acarter867.github.io/Daily-Calendar/">Visit my Daily Calendar!</a>
 
 ## Preview:
-<img src="./assets/Photos/Scheduler screenshot.png" alt="Daily Schedule Preview">
+<img src="/assets/Photos/Scheduler screenshot.png" alt="Daily Schedule Preview">
