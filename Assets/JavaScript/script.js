@@ -41,22 +41,18 @@ $(function () {
       //get parent time block of clicked button
       let buttonParent = $(e.target).parent();
 
+      $('.confirmation').text("Appointment added to local storage");
+
       //get id of parent time block
       let divId = $(buttonParent).attr('id');
 
-      //select text area of parent block
+      //select text area of psarent block
       let selectedText = $(buttonParent).children('textarea');
 
       //get user input from text area and send to local storage with key set as the id of current time block
       let newEvent = selectedText.val();
       localStorage.setItem(divId, JSON.stringify(newEvent));
-    })
-
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
+    });
 });
 
 function getDateTime(){
@@ -88,8 +84,8 @@ function getDateTime(){
 
 
 //function to return name of month when given month numbers
-function getMonth(something){
-  switch(something){
+function getMonth(monthNumber){
+  switch(monthNumber){
     case 0: return 'January';
     case 1: return 'February';
     case 2: return 'March';
