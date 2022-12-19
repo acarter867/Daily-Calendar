@@ -18,27 +18,33 @@ $(function () {
 
   for(let i = 0; i < hourBlocks.length; i++){
     let currentRow = hourBlocks[i];
-    let curDiv = $(currentRow)
+    console.log(currentRow);
+    let curDiv = $(currentRow);
     if(currentRow.id < currentHour){
-      curDiv.addClass('past')
+      curDiv.addClass('past');
     }else if(currentRow.id > currentHour){
-      curDiv.addClass('future')
+      curDiv.addClass('future');
     }else{
-      curDiv.addClass('present')
+      curDiv.addClass('present');
     }
+
+    
   }
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
+
+//push events to local storage
+  hourBlocks.children("button").on('click', (e) => {
+      let buttonParent = $(e.target).parent();
+      let divId = $(buttonParent).attr('id');
+      let selectedText = $(buttonParent).children('textarea');
+      let newEvent = selectedText.val();
+      localStorage.setItem(divId, JSON.stringify(newEvent));
+    })
+
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  // TODO: Add code to display the current date in the header of the page.
 });
 
 function getDateTime(){
